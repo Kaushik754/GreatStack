@@ -1,4 +1,4 @@
-const apiKey = "68cde4263b8e5641fb9f5670eea28ba5";
+const apiKey = "ENTER_API_KEY";
 const city = "Kolkata"; // You can change the city as needed
 
 async function getWeather() {
