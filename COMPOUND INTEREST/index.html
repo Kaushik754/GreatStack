@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mutual Fund Compound Interest</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="calculator">
+      <h2 class="title">Mutual Fund <br />Compound Interest Calculator</h2>
+      <form action="" id="interest-form">
+        <label for="principal">Initial Invesment (₹):</label>
+        <input type="number" name="" id="principal" required />
+
+        <label for="contribution">Monthly Contribution (₹):</label>
+        <input type="number" name="" id="contribution" required />
+
+        <label for="rate">Anual Interest Rate (%):</label>
+        <input type="number" name="" id="rate" step="0.01" required />
+
+        <label for="years">Number of years:</label>
+        <input type="number" name="" id="years" required />
+
+        <button type="button" onclick="calculateInterest()">Calculate</button>
+      </form>
+      <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

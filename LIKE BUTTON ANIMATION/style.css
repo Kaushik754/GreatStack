@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.container {
+    position: relative;
+    border: 2px solid #ddd;
+    padding: 13px 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.container .heart {
+    width: 100px;
+    height: 100px;
+    background: url(./img/heart.png) no-repeat;
+    background-position: left;
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+}
+.container.heart-active .heart {
+    animation: animate 0.8s steps(28);
+    background-position: right;
+}
+@keyframes animate {
+    0% {background-position: left;}
+    100%{background-position: right;}
+}
+.container .numb {
+    margin-left: 7px;
+    font-size: 21px;
+    font-weight: 600;
+    color: #9c9496;
+}
+.container .like {
+    margin-left: 30px;
+    font-size: 21px;
+    font-weight: 600;
+    color: #999;
+}
+.container.heart-active .like,
+.container.heart-active .numb {
+    color: #000;
+}
+
+.container.heart-active {
+    background-color: rgb(244, 181, 213);
+    border: 2px solid rgb(244, 181, 213);
+}

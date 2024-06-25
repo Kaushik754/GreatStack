@@ -1,4 +1,4 @@
-const apiKey = "ENTER_API_KEY";
+const apiKey = "Enter_API_Key";
 const city = "Kolkata"; // You can change the city as needed
 
 async function getWeather() {
@@ -11,12 +11,14 @@ async function getWeather() {
 
 function chooseSong(weather) {
   let songUrl = "./song/bengali.m4a";
-  if (weather.includes("cloud")) {
+  if (weather.includes("rain")) {
     songUrl = "./song/has.m4a"; // Replace with your actual song URL
   } else if (weather.includes("clear")) {
     songUrl = "./song/hhd.m4a"; // Replace with your actual song URL
-  } else if (weather.includes("haze")) {
+  } else if (weather.includes("cloud")) {
     songUrl = "./song/lapata.m4a"; // Replace with your actual song URL
+  } else if (weather.includes("haze")) {
+    songUrl = "./song/bengali.m4a";
   } else {
     songUrl = "./song/tumhiho.m4a"; // Default song
   }
@@ -45,6 +47,7 @@ async function updateMusicPlayer() {
 
 function showNotification(weatherDescription, songUrl) {
   if (Notification.permission === "granted") {
+    createNotification();
     new Notification(`Weather: ${weatherDescription}`, {
       body: `Now playing: ${songUrl.split("/").pop()}`,
       icon: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt3173910%2F&psig=AOvVaw0mbJNZy9NoJA6oYemKwcwf&ust=1719369249134000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKiKs9zb9YYDFQAAAAAdAAAAABAE", // Replace with your actual icon URL
@@ -52,13 +55,28 @@ function showNotification(weatherDescription, songUrl) {
   } else if (Notification.permission !== "denied") {
     Notification.requestPermission().then((permission) => {
       if (permission === "granted") {
+        createNotification();
         new Notification(`Weather: ${weatherDescription}`, {
           body: `Now playing: ${songUrl.split("/").pop()}`,
-          icon: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt3173910%2F&psig=AOvVaw0mbJNZy9NoJA6oYemKwcwf&ust=1719369249134000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKiKs9zb9YYDFQAAAAAdAAAAABAE", // Replace with your actual icon URL
+          icon: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.imdb.com%2Ftitle%2Ftt3173910%2F&psig=AOvVaw0mbJNZy9NoJA6oYemKwcwf&ust=1719369249134000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKiKs9zb9YYDFQAAAAAdAAAAABAE",
+          // Replace with your actual icon URL
         });
       }
     });
   }
+  function createNotification() {
+    var phoneNumber = "91+6290468136"; // Replace with the actual phone number
+
+    var notification = new Notification("New Message", {
+      body: "You have a new message from " + phoneNumber,
+    });
+
+    notification.onclick = function () {
+      // Handle what happens when the user clicks on the notification
+      alert("Clicked on the notification");
+    };
+  }
+
   setTimeout(updateMusicPlayer, 120000);
 }
 
@@ -78,7 +96,6 @@ function playPause() {
     song.pause();
     ctrlIcon.classList.remove("fa-pause");
     ctrlIcon.classList.add("fa-play");
-    
   } else {
     song.play();
     ctrlIcon.classList.add("fa-pause");
@@ -86,16 +103,15 @@ function playPause() {
   }
 }
 
-if(song.play()) {
+if (song.play()) {
   setInterval(() => {
     progress.value = song.currentTime;
-  },500);
+  }, 500);
 }
 
-progress.onchange = function() {
+progress.onchange = function () {
   song.play();
   song.currentTime = progress.value;
   ctrlIcon.classList.add("fa-pause");
   ctrlIcon.classList.remove("fa-play");
-}
-
+};
